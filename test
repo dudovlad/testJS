@@ -1,0 +1,57 @@
+var foodType = {fish: 0, bones: 1}
+
+function Animal()
+{
+    var foodTypeForEating;
+
+    this.Eat = function(foodType) {foodTypeForEating = foodType;}
+
+    this.SaySomething = function(typicalFoodOfAnimal)    
+    {
+        if (typeof(foodTypeForEating) == "undefined" || foodTypeForEating == null) 
+        {
+            console.log("Nothing to eat...");
+        }
+        else 
+        {
+            if (foodTypeForEating == typicalFoodOfAnimal)
+            {
+                console.log("It's very tasty...");
+            }
+            else
+            {
+                console.log("I will not eat it...");
+            }
+        }
+    }
+}
+
+var Cat = function()
+{
+    var typicalFoodOfCats = foodType.fish;
+    
+    this.__proto__ = new Animal();
+    
+    this.SaySomething = function() {this.__proto__.SaySomething(typicalFoodOfCats);}
+}
+
+var Dog = function()
+{
+    var typicalFoodOfDogs = foodType.bones;
+    
+    this.__proto__ = new Animal();
+    
+    this.SaySomething = function() {this.__proto__.SaySomething(typicalFoodOfDogs);}
+}
+
+var cat = new Cat();
+var dog = new Dog();
+
+cat.Eat(foodType.fish);
+dog.Eat(foodType.fish);
+cat.SaySomething();
+dog.SaySomething();
+
+var animal = new Animal();
+animal.Eat(foodType.fish)
+animal.SaySomething(foodType.fish);
